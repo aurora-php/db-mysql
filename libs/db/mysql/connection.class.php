@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db\mongodb {
+namespace org\octris\core\db\mysql {
 	/**
-	 * MongoDB database device.
+	 * MySQL connection handler.
 	 *
-	 * @octdoc		c:mongodb/connection
+	 * @octdoc		c:mysql/connection
      * @copyright   copyright (c) 2012 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
@@ -21,24 +21,6 @@ namespace org\octris\core\db\mongodb {
 	/**/
 	{
 		use \org\octris\core\db\pool_tr;
-
-		/**
-		 * Instance of mongo class.
-		 *
-		 * @octdoc  p:connection/$mongo
-		 * @var     \Mongo
-		 */
-		protected $mongo;
-		/**/
-
-		/**
-		 * Connection to a database.
-		 *
-		 * @octdoc  p:connection/$db
-		 * @var     \MongoDB
-		 */
-		protected $db;
-		/**/
 
 		/**
 		 * Constructor.
