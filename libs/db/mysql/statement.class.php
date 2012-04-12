@@ -65,9 +65,9 @@ namespace org\octris\core\db\mysql {
 		/**/
 		{
 			if (preg_match('/[^idsb]/', $types)) {
-				throw new \Exception('unknown data type in "' . $types . '"');
+				throw new \Exception('Unknown data type in "' . $types . '"');
 			} elseif (strlen($types) != ($cnt1 = count($values))) {
-				throw new \Exception('number of specified types and values does not match');
+				throw new \Exception('Number of specified types and values does not match');
 			} elseif ($cnt1 != ($cnt2 = $this->paramCount())) {
 				throw new \Exception(
 					sprintf(
