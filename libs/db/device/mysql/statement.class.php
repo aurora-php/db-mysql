@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db\mysql {
+namespace org\octris\core\db\device\mysql {
 	/**
 	 * MySQL prepared statement.
 	 *
@@ -87,6 +87,7 @@ namespace org\octris\core\db\mysql {
 		 * Execute the statement.
 		 *
 		 * @octdoc  m:statement/execute
+		 * @return 	\org\octris\core\db\device\mysql 				Instance of mysql result set.
 		 */
 		public function execute()
 		/**/
@@ -94,7 +95,7 @@ namespace org\octris\core\db\mysql {
 			$this->instance->execute();
 			$this->instance->store_result();
 
-			$result = new \org\octris\core\db\mysql\result($this->instance);
+			$result = new \org\octris\core\db\device\mysql\result($this->instance);
 
 	        return $result;
 		}

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db\mysql {
+namespace org\octris\core\db\device\mysql {
 	/**
 	 * MySQL connection handler.
 	 *
@@ -17,7 +17,7 @@ namespace org\octris\core\db\mysql {
      * @copyright   copyright (c) 2012 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-	class connection extends \mysqli implements \org\octris\core\db\connection_if, \org\octris\core\db\pool_if
+	class connection extends \mysqli implements \org\octris\core\db\device\connection_if, \org\octris\core\db\pool_if
 	/**/
 	{
 		use \org\octris\core\db\pool_tr;

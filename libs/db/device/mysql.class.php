@@ -107,12 +107,12 @@ namespace org\octris\core\db\device {
 		 * Create database connection.
 		 *
 		 * @octdoc 	m:mysql/getConnection
-		 * @return 	\org\octris\core\db\mysql\connection 			Connection to a mysql database.
+		 * @return 	\org\octris\core\db\device\mysql\connection 			Connection to a mysql database.
 		 */
 		public getConnection()
 		/**/
 		{
-			$cn = new \org\octris\core\db\mysql\connection(
+			$cn = new \org\octris\core\db\device\mysql\connection(
 				array(
 					'host'	   => $this->host,
 					'port'	   => $this->port,
