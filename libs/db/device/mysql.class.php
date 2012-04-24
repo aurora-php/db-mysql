@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db {
+namespace org\octris\core\db\device {
 	/**
 	 * MySQL database device.
 	 *
-	 * @octdoc		c:db/mysql
+	 * @octdoc		c:mysql/mysql
      * @copyright   copyright (c) 2012 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
@@ -24,7 +24,7 @@ namespace org\octris\core\db {
 		 * Configuration of attempts a query should be executed, till a deadlock is actually
 		 * recognized and query is failing.
 		 *
-		 * @octdoc 	d:device/T_DEADLOCK_ATTEMPTS
+		 * @octdoc 	d:mysql/T_DEADLOCK_ATTEMPTS
 		 */
 		const T_DEADLOCK_ATTEMPTS = 5;
 		/**/
