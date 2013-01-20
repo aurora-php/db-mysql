@@ -65,17 +65,55 @@ namespace org\octris\core\db\device\mysql {
          *
          * @octdoc  m:connection/query
          * @param   string              $sql                    SQL query to perform.
-         * @param   bool                $multi                  Optional setting to indicate, that multiple
-         *                                                      queries should be performed.
          * @return  \org\octris\core\db\mysql\result            Query result.
          */
-        public function query($sql, $multi = \org\octris\core\db\mysql::T_QUERY_SINGLE)
+        public function query($sql)
         /**/
         {
             for ($i = 0; $i < \org\octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
-                $res = ($multi === \org\octris\core\db\mysql::T_QUERY_MULTI
-                        ? $this->multi_query($sql)
-                        : $this->real_query($sql));
+                $res = $this->real_query($sql);
+
+                if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
+                    break;
+                }
+            }
+
+            if ($res === false) {
+                throw new \Exception($this->error, $this->errno);
+            }
+
+            return new \org\octris\core\db\mysql\result($this);
+        }
+
+        /**
+         * Performs asynchronous query.
+         *
+         * @octdoc  m:connection/asyncQuery
+         * @param   string              $sql                    SQL query to perform.
+         * @return  \org\octris\core\db\mysql\async             Asynchronous query object.
+         */
+        public function asyncQuery($sql)
+        /**/
+        {
+            $this->query($sql, MYSQLI_ASYNC);
+
+            $async = \org\octris\core\db\mysql\async::getInstance();
+            $async->addLink($this);
+
+            return $async;
+        }
+
+        /**
+         * Execute one or multiple queries separated by a ';'.
+         *
+         * @octdoc  m:connection/multiQuery
+         * @param   string              $sql                    SQL query to perform.
+         */
+        public function multiQuery($sql)
+        /**/
+        {
+            for ($i = 0; $i < \org\octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+                $res = $this->multi_query($sql);
 
                 if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
                     break;
