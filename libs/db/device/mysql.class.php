@@ -30,15 +30,6 @@ namespace org\octris\core\db\device {
         /**/
 
         /**
-         * Flags to indicate that a query consists of multiple SQL statements.
-         *
-         * @octdoc  d:mysql/T_QUERY_MULTI, T_QUERY_SINGLE
-         */
-        const T_QUERY_MULTI  = true;
-        const T_QUERY_SINGLE = false;
-        /**/
-
-        /**
          * Host of database server.
          *
          * @octdoc  p:mysql/$host
