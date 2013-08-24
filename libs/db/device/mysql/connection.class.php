@@ -54,7 +54,6 @@ namespace org\octris\core\db\device\mysql {
         
             $this->autocommit(true);
         
-
             parent::release();
         }
 
