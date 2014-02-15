@@ -24,7 +24,7 @@ namespace org\octris\core\db\device\mysql {
          * Instance of mysqli_stmt class.
          *
          * @octdoc  p:statement/$instance
-         * @var     \mysqli_stmt
+         * @type    \mysqli_stmt
          */
         protected $instance;
         /**/

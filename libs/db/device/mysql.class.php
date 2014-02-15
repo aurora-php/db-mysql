@@ -33,7 +33,7 @@ namespace org\octris\core\db\device {
          * Host of database server.
          *
          * @octdoc  p:mysql/$host
-         * @var     string
+         * @type    string
          */
         protected $host;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\core\db\device {
          * Port of database server.
          *
          * @octdoc  p:mysql/$port
-         * @var     int
+         * @type    int
          */
         protected $port;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\core\db\device {
          * Name of database to connect to.
          *
          * @octdoc  p:mysql/$database
-         * @var     string
+         * @type    string
          */
         protected $database;
         /**/
@@ -60,7 +60,7 @@ namespace org\octris\core\db\device {
          * Username to use for connection.
          *
          * @octdoc  p:mysql/$username
-         * @var     string
+         * @type    string
          */
         protected $username;
         /**/
@@ -69,7 +69,7 @@ namespace org\octris\core\db\device {
          * Password to use for connection.
          *
          * @octdoc  p:mysql/$password
-         * @var     string
+         * @type    string
          */
         protected $password;
         /**/
