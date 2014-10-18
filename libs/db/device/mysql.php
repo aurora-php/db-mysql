@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'org.octris.core' package.
+ * This file is part of the 'octris/core' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db\device {
+namespace octris\core\db\device {
     /**
      * MySQL database device.
      *
@@ -17,7 +17,7 @@ namespace org\octris\core\db\device {
      * @copyright   copyright (c) 2012 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class mysql extends \org\octris\core\db\device
+    class mysql extends \octris\core\db\device
     /**/
     {
         /**
@@ -98,12 +98,12 @@ namespace org\octris\core\db\device {
          * Create database connection.
          *
          * @octdoc  m:mysql/getConnection
-         * @return  \org\octris\core\db\device\mysql\connection             Connection to a mysql database.
+         * @return  \octris\core\db\device\mysql\connection             Connection to a mysql database.
          */
         public getConnection()
         /**/
         {
-            $cn = new \org\octris\core\db\device\mysql\connection(
+            $cn = new \octris\core\db\device\mysql\connection(
                 array(
                     'host'     => $this->host,
                     'port'     => $this->port,

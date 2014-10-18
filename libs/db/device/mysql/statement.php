@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'org.octris.core' package.
+ * This file is part of the 'octris/core' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db\device\mysql {
+namespace octris\core\db\device\mysql {
     /**
      * MySQL prepared statement.
      *
@@ -91,7 +91,7 @@ namespace org\octris\core\db\device\mysql {
          * Execute the statement.
          *
          * @octdoc  m:statement/execute
-         * @return  \org\octris\core\db\device\mysql                Instance of mysql result set.
+         * @return  \octris\core\db\device\mysql                Instance of mysql result set.
          */
         public function execute()
         /**/
@@ -99,7 +99,7 @@ namespace org\octris\core\db\device\mysql {
             $this->instance->execute();
             $this->instance->store_result();
 
-            $result = new \org\octris\core\db\device\mysql\result($this->instance);
+            $result = new \octris\core\db\device\mysql\result($this->instance);
 
             return $result;
         }

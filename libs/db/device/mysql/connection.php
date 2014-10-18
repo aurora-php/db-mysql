@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'org.octris.core' package.
+ * This file is part of the 'octris/core' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\core\db\device\mysql {
+namespace octris\core\db\device\mysql {
     /**
      * MySQL connection handler.
      *
@@ -17,10 +17,10 @@ namespace org\octris\core\db\device\mysql {
      * @copyright   copyright (c) 2012 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class connection extends \mysqli implements \org\octris\core\db\device\connection_if, \org\octris\core\db\pool_if
+    class connection extends \mysqli implements \octris\core\db\device\connection_if, \octris\core\db\pool_if
     /**/
     {
-        use \org\octris\core\db\pool_tr;
+        use \octris\core\db\pool_tr;
 
         /**
          * Constructor.
@@ -59,17 +59,17 @@ namespace org\octris\core\db\device\mysql {
 
         /**
          * Query the database. The query will handle deadlocks and perform several tries up
-         * to \org\octris\core\db\mysql::T_DEADLOCK_ATTEMPTS until a deadlock is considered
+         * to \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS until a deadlock is considered
          * to be unresolvable.
          *
          * @octdoc  m:connection/query
          * @param   string              $sql                    SQL query to perform.
-         * @return  \org\octris\core\db\mysql\result            Query result.
+         * @return  \octris\core\db\mysql\result            Query result.
          */
         public function query($sql)
         /**/
         {
-            for ($i = 0; $i < \org\octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+            for ($i = 0; $i < \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
                 $res = $this->real_query($sql);
 
                 if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
@@ -81,7 +81,7 @@ namespace org\octris\core\db\device\mysql {
                 throw new \Exception($this->error, $this->errno);
             }
 
-            return new \org\octris\core\db\mysql\result($this);
+            return new \octris\core\db\mysql\result($this);
         }
 
         /**
@@ -89,14 +89,14 @@ namespace org\octris\core\db\device\mysql {
          *
          * @octdoc  m:connection/asyncQuery
          * @param   string              $sql                    SQL query to perform.
-         * @return  \org\octris\core\db\mysql\async             Asynchronous query object.
+         * @return  \octris\core\db\mysql\async             Asynchronous query object.
          */
         public function asyncQuery($sql)
         /**/
         {
             $this->query($sql, MYSQLI_ASYNC);
 
-            $async = \org\octris\core\db\mysql\async::getInstance();
+            $async = \octris\core\db\mysql\async::getInstance();
             $async->addLink($this);
 
             return $async;
@@ -111,7 +111,7 @@ namespace org\octris\core\db\device\mysql {
         public function multiQuery($sql)
         /**/
         {
-            for ($i = 0; $i < \org\octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+            for ($i = 0; $i < \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
                 $res = $this->multi_query($sql);
 
                 if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
@@ -123,7 +123,7 @@ namespace org\octris\core\db\device\mysql {
                 throw new \Exception($this->error, $this->errno);
             }
 
-            return new \org\octris\core\db\mysql\result($this);
+            return new \octris\core\db\mysql\result($this);
         }
 
         /**
@@ -131,12 +131,12 @@ namespace org\octris\core\db\device\mysql {
          *
          * @octdoc  m:connection/prepare
          * @param   string              $sql                    SQL query to prepare.
-         * @return  \org\octris\core\db\mysql\statement         Instance of a prepared statement.
+         * @return  \octris\core\db\mysql\statement         Instance of a prepared statement.
          */
         public function prepare($sql)
         /**/
         {
-            $stmt = new \org\octris\core\db\mysql\statement($this, $sql);
+            $stmt = new \octris\core\db\mysql\statement($this, $sql);
 
             if ($stmt->errno > 0) {
                throw new \Exception($stmt->sqlstate . ' ' . $stmt->error, $stmt->errno);
