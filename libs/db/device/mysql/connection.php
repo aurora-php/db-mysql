@@ -18,7 +18,6 @@ namespace octris\core\db\device\mysql {
      * @author      Harald Lapp <harald@octris.org>
      */
     class connection extends \mysqli implements \octris\core\db\device\connection_if, \octris\core\db\pool_if
-    /**/
     {
         use \octris\core\db\pool_tr;
 
@@ -29,7 +28,6 @@ namespace octris\core\db\device\mysql {
          * @param   array                       $options            Connection options.
          */
         public function __construct(array $options)
-        /**/
         {
             parent::__construct($options['host'], $options['username'], $options['password'], $options['database'], $options['port']);
 
@@ -44,7 +42,6 @@ namespace octris\core\db\device\mysql {
          * @octdoc  m:connection/release
          */
         public function release()
-        /**/
         {
             if ($this->more_results()) {
                 while ($this->next_result()) {
@@ -67,7 +64,6 @@ namespace octris\core\db\device\mysql {
          * @return  \octris\core\db\mysql\result            Query result.
          */
         public function query($sql)
-        /**/
         {
             for ($i = 0; $i < \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
                 $res = $this->real_query($sql);
@@ -92,7 +88,6 @@ namespace octris\core\db\device\mysql {
          * @return  \octris\core\db\mysql\async             Asynchronous query object.
          */
         public function asyncQuery($sql)
-        /**/
         {
             $this->query($sql, MYSQLI_ASYNC);
 
@@ -109,7 +104,6 @@ namespace octris\core\db\device\mysql {
          * @param   string              $sql                    SQL query to perform.
          */
         public function multiQuery($sql)
-        /**/
         {
             for ($i = 0; $i < \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
                 $res = $this->multi_query($sql);
@@ -134,7 +128,6 @@ namespace octris\core\db\device\mysql {
          * @return  \octris\core\db\mysql\statement         Instance of a prepared statement.
          */
         public function prepare($sql)
-        /**/
         {
             $stmt = new \octris\core\db\mysql\statement($this, $sql);
 

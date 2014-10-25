@@ -18,7 +18,6 @@ namespace octris\core\db\device {
      * @author      Harald Lapp <harald@octris.org>
      */
     class mysql extends \octris\core\db\device
-    /**/
     {
         /**
          * Configuration of attempts a query should be executed, till a deadlock is actually
@@ -85,7 +84,6 @@ namespace octris\core\db\device {
          * @param   string          $password           Optional password to use for connection.
          */
         public __construct($host, $port, $database, $username, $password = '')
-        /**/
         {
             $this->host     = $host;
             $this->port     = $port;
@@ -101,7 +99,6 @@ namespace octris\core\db\device {
          * @return  \octris\core\db\device\mysql\connection             Connection to a mysql database.
          */
         public getConnection()
-        /**/
         {
             $cn = new \octris\core\db\device\mysql\connection(
                 array(

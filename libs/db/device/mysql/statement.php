@@ -18,7 +18,6 @@ namespace octris\core\db\device\mysql {
      * @author      Harald Lapp <harald@octris.org>
      */
     class statement
-    /**/
     {
         /**
          * Instance of mysqli_stmt class.
@@ -37,7 +36,6 @@ namespace octris\core\db\device\mysql {
          * @param   string          $sql                SQL statement.
          */
         public function __construct(\mysqli $link, $sql)
-        /**/
         {
             $this->instance = new \mysqli_stmt($link, $sql);
         }
@@ -49,7 +47,6 @@ namespace octris\core\db\device\mysql {
          * @return  int                                 Number of parameters.
          */
         public function paramCount()
-        /**/
         {
             return $this->instance->param_count;
         }
@@ -62,7 +59,6 @@ namespace octris\core\db\device\mysql {
          * @param   array           $values             Array of values to bind.
          */
         public function bindParam($types, array $values)
-        /**/
         {
             if (preg_match('/[^idsb]/', $types)) {
                 throw new \Exception('Unknown data type in "' . $types . '"');
@@ -94,7 +90,6 @@ namespace octris\core\db\device\mysql {
          * @return  \octris\core\db\device\mysql                Instance of mysql result set.
          */
         public function execute()
-        /**/
         {
             $this->instance->execute();
             $this->instance->store_result();
