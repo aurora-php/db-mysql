@@ -37,7 +37,7 @@ class mysql extends \octris\core\db\device
      */
     protected $host;
     /**/
-    
+
     /**
      * Port of database server.
      *
@@ -64,7 +64,7 @@ class mysql extends \octris\core\db\device
      */
     protected $username;
     /**/
-    
+
     /**
      * Password to use for connection.
      *

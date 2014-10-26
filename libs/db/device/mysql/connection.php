@@ -49,9 +49,9 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
                 $this->use_result()->close();
             }
         }
-    
+
         $this->autocommit(true);
-    
+
         parent::release();
     }
 
@@ -135,7 +135,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
         if ($stmt->errno > 0) {
            throw new \Exception($stmt->sqlstate . ' ' . $stmt->error, $stmt->errno);
         }
-    
+
         return $stmt;
     }
 }
