@@ -84,7 +84,7 @@ class mysql extends \octris\core\db\device
      * @param   string          $username           Username to use for connection.
      * @param   string          $password           Optional password to use for connection.
      */
-    public __construct($host, $port, $database, $username, $password = '')
+    public function __construct($host, $port, $database, $username, $password = '')
     {
         $this->host     = $host;
         $this->port     = $port;
@@ -99,7 +99,7 @@ class mysql extends \octris\core\db\device
      * @octdoc  m:mysql/getConnection
      * @return  \octris\core\db\device\mysql\connection             Connection to a mysql database.
      */
-    public getConnection()
+    public function getConnection()
     {
         $cn = new \octris\core\db\device\mysql\connection(
             array(
