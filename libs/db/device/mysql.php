@@ -114,4 +114,3 @@ class mysql extends \octris\core\db\device
         return $cn;
     }
 }
-

@@ -100,4 +100,3 @@ class statement
         return $result;
     }
 }
-

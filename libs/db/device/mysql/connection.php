@@ -139,4 +139,3 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
         return $stmt;
     }
 }
-
