@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\core\db\device;
+namespace Octris\Core\Db\Device;
 
 /**
  * MySQL database device.
@@ -18,7 +18,7 @@ namespace octris\core\db\device;
  * @copyright   copyright (c) 2012 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class mysql extends \octris\core\db\device
+class Mysql extends \Octris\Core\Db\Device
 {
     /**
      * Configuration of attempts a query should be executed, till a deadlock is actually
@@ -101,7 +101,7 @@ class mysql extends \octris\core\db\device
      */
     public function getConnection()
     {
-        $cn = new \octris\core\db\device\mysql\connection(
+        $cn = new \Octris\Core\Db\Device\Mysql\Connection(
             array(
                 'host'     => $this->host,
                 'port'     => $this->port,

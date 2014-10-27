@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\core\db\device\mysql;
+namespace Octris\Core\Db\Device\Mysql;
 
 /**
  * MySQL connection handler.
@@ -18,7 +18,7 @@ namespace octris\core\db\device\mysql;
  * @copyright   copyright (c) 2012 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class connection extends \mysqli implements \octris\core\db\device\connection_if, \octris\core\db\pool_if
+class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if, \octris\core\db\pool_if
 {
     use \octris\core\db\pool_tr;
 
@@ -57,7 +57,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
 
     /**
      * Query the database. The query will handle deadlocks and perform several tries up
-     * to \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS until a deadlock is considered
+     * to \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS until a deadlock is considered
      * to be unresolvable.
      *
      * @octdoc  m:connection/query
@@ -66,7 +66,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
      */
     public function query($sql)
     {
-        for ($i = 0; $i < \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+        for ($i = 0; $i < \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
             $res = $this->real_query($sql);
 
             if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
@@ -78,7 +78,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
             throw new \Exception($this->error, $this->errno);
         }
 
-        return new \octris\core\db\mysql\result($this);
+        return new \Octris\Core\Db\Mysql\Result($this);
     }
 
     /**
@@ -92,7 +92,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
     {
         $this->query($sql, MYSQLI_ASYNC);
 
-        $async = \octris\core\db\mysql\async::getInstance();
+        $async = \Octris\Core\Db\Mysql\Async::getInstance();
         $async->addLink($this);
 
         return $async;
@@ -106,7 +106,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
      */
     public function multiQuery($sql)
     {
-        for ($i = 0; $i < \octris\core\db\mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+        for ($i = 0; $i < \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
             $res = $this->multi_query($sql);
 
             if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
@@ -118,7 +118,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
             throw new \Exception($this->error, $this->errno);
         }
 
-        return new \octris\core\db\mysql\result($this);
+        return new \Octris\Core\Db\Mysql\Result($this);
     }
 
     /**
@@ -130,7 +130,7 @@ class connection extends \mysqli implements \octris\core\db\device\connection_if
      */
     public function prepare($sql)
     {
-        $stmt = new \octris\core\db\mysql\statement($this, $sql);
+        $stmt = new \Octris\Core\Db\Mysql\Statement($this, $sql);
 
         if ($stmt->errno > 0) {
            throw new \Exception($stmt->sqlstate . ' ' . $stmt->error, $stmt->errno);

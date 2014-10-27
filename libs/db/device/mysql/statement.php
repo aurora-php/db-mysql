@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\core\db\device\mysql;
+namespace Octris\Core\Db\Device\Mysql;
 
 /**
  * MySQL prepared statement.
@@ -18,7 +18,7 @@ namespace octris\core\db\device\mysql;
  * @copyright   copyright (c) 2012 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class statement
+class Statement
 {
     /**
      * Instance of mysqli_stmt class.
@@ -95,7 +95,7 @@ class statement
         $this->instance->execute();
         $this->instance->store_result();
 
-        $result = new \octris\core\db\device\mysql\result($this->instance);
+        $result = new \Octris\Core\Db\Device\Mysql\Result($this->instance);
 
         return $result;
     }
