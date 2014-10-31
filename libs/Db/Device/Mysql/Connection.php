@@ -17,7 +17,7 @@ namespace Octris\Core\Db\Device\Mysql;
  * @copyright   copyright (c) 2012 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if, \octris\core\db\pool_if
+class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, \octris\core\db\pool_if
 {
     use \octris\core\db\pool_tr;
 
