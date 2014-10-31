@@ -14,7 +14,6 @@ namespace Octris\Core\Db\Device\Mysql;
 /**
  * MySQL connection handler.
  *
- * @octdoc      c:mysql/connection
  * @copyright   copyright (c) 2012 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -25,7 +24,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if
     /**
      * Constructor.
      *
-     * @octdoc  m:connection/__construct
      * @param   array                       $options            Connection options.
      */
     public function __construct(array $options)
@@ -40,7 +38,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if
     /**
      * Release a connection.
      *
-     * @octdoc  m:connection/release
      */
     public function release()
     {
@@ -60,7 +57,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if
      * to \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS until a deadlock is considered
      * to be unresolvable.
      *
-     * @octdoc  m:connection/query
      * @param   string              $sql                    SQL query to perform.
      * @return  \octris\core\db\mysql\result            Query result.
      */
@@ -84,7 +80,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if
     /**
      * Performs asynchronous query.
      *
-     * @octdoc  m:connection/asyncQuery
      * @param   string              $sql                    SQL query to perform.
      * @return  \octris\core\db\mysql\async             Asynchronous query object.
      */
@@ -101,7 +96,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if
     /**
      * Execute one or multiple queries separated by a ';'.
      *
-     * @octdoc  m:connection/multiQuery
      * @param   string              $sql                    SQL query to perform.
      */
     public function multiQuery($sql)
@@ -124,7 +118,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\Connection_if
     /**
      * Initialize prepared statement.
      *
-     * @octdoc  m:connection/prepare
      * @param   string              $sql                    SQL query to prepare.
      * @return  \octris\core\db\mysql\statement         Instance of a prepared statement.
      */

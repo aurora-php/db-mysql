@@ -14,7 +14,6 @@ namespace Octris\Core\Db\Device\Mysql;
 /**
  * MySQL prepared statement.
  *
- * @octdoc      c:mysql/statement
  * @copyright   copyright (c) 2012 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -23,16 +22,13 @@ class Statement
     /**
      * Instance of mysqli_stmt class.
      *
-     * @octdoc  p:statement/$instance
      * @type    \mysqli_stmt
      */
     protected $instance;
-    /**/
-
+    
     /**
      * Constructor.
      *
-     * @octdoc  m:statement/__construct
      * @param   \mysqli         $link               Database connection.
      * @param   string          $sql                SQL statement.
      */
@@ -44,7 +40,6 @@ class Statement
     /**
      * Returns number of parameters in statement.
      *
-     * @octdoc  m:statement/paramCount
      * @return  int                                 Number of parameters.
      */
     public function paramCount()
@@ -55,7 +50,6 @@ class Statement
     /**
      * Bind parameters to statement.
      *
-     * @octdoc  m:statement/bindParam
      * @param   string          $types              String of type identifiers.
      * @param   array           $values             Array of values to bind.
      */
@@ -87,7 +81,6 @@ class Statement
     /**
      * Execute the statement.
      *
-     * @octdoc  m:statement/execute
      * @return  \octris\core\db\device\mysql                Instance of mysql result set.
      */
     public function execute()
