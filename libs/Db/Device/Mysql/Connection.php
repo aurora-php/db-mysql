@@ -126,7 +126,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, 
         $stmt = new \Octris\Core\Db\Mysql\Statement($this, $sql);
 
         if ($stmt->errno > 0) {
-           throw new \Exception($stmt->sqlstate . ' ' . $stmt->error, $stmt->errno);
+            throw new \Exception($stmt->sqlstate . ' ' . $stmt->error, $stmt->errno);
         }
 
         return $stmt;
