@@ -17,9 +17,9 @@ namespace Octris\Core\Db\Device\Mysql;
  * @copyright   copyright (c) 2012-2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, \octris\core\db\pool_if
+class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, \Octris\Core\Db\pool_if
 {
-    use \octris\core\db\pool_tr;
+    use \Octris\Core\Db\pool_tr;
 
     /**
      * Constructor.
@@ -57,7 +57,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, 
      * to be unresolvable.
      *
      * @param   string              $sql                    SQL query to perform.
-     * @return  \octris\core\db\mysql\result            Query result.
+     * @return  \Octris\Core\Db\Mysql\Result            Query result.
      */
     public function query($sql)
     {
@@ -80,7 +80,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, 
      * Performs asynchronous query.
      *
      * @param   string              $sql                    SQL query to perform.
-     * @return  \octris\core\db\mysql\async             Asynchronous query object.
+     * @return  \Octris\Core\Db\Mysql\Async             Asynchronous query object.
      */
     public function asyncQuery($sql)
     {
@@ -118,7 +118,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, 
      * Initialize prepared statement.
      *
      * @param   string              $sql                    SQL query to prepare.
-     * @return  \octris\core\db\mysql\statement         Instance of a prepared statement.
+     * @return  \Octris\Core\Db\Mysql\Statement         Instance of a prepared statement.
      */
     public function prepare($sql)
     {

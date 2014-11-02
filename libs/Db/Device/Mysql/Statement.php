@@ -25,7 +25,7 @@ class Statement
      * @type    \mysqli_stmt
      */
     protected $instance;
-    
+
     /**
      * Constructor.
      *
@@ -81,7 +81,7 @@ class Statement
     /**
      * Execute the statement.
      *
-     * @return  \octris\core\db\device\mysql                Instance of mysql result set.
+     * @return  \Octris\Core\Db\Device\Mysql                Instance of mysql result set.
      */
     public function execute()
     {

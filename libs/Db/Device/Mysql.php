@@ -81,7 +81,7 @@ class Mysql extends \Octris\Core\Db\Device
     /**
      * Create database connection.
      *
-     * @return  \octris\core\db\device\mysql\connection             Connection to a mysql database.
+     * @return  \Octris\Core\Db\Device\Mysql\Connection             Connection to a mysql database.
      */
     public function getConnection()
     {
