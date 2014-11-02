@@ -22,45 +22,44 @@ class Mysql extends \Octris\Core\Db\Device
     /**
      * Configuration of attempts a query should be executed, till a deadlock is actually
      * recognized and query is failing.
-     *
      */
     const T_DEADLOCK_ATTEMPTS = 5;
-    
+
     /**
      * Host of database server.
      *
      * @type    string
      */
     protected $host;
-    
+
     /**
      * Port of database server.
      *
      * @type    int
      */
     protected $port;
-    
+
     /**
      * Name of database to connect to.
      *
      * @type    string
      */
     protected $database;
-    
+
     /**
      * Username to use for connection.
      *
      * @type    string
      */
     protected $username;
-    
+
     /**
      * Password to use for connection.
      *
      * @type    string
      */
     protected $password;
-    
+
     /**
      * Constructor.
      *

@@ -37,7 +37,6 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, 
 
     /**
      * Release a connection.
-     *
      */
     public function release()
     {
