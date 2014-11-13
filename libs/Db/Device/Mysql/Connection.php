@@ -51,7 +51,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
 
     /**
      * Query the database. The query will handle deadlocks and perform several tries up
-     * to \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS until a deadlock is considered
+     * to \Octris\Core\Db\Mysql::DEADLOCK_ATTEMPTS until a deadlock is considered
      * to be unresolvable.
      *
      * @param   string              $sql                    SQL query to perform.
@@ -59,7 +59,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
      */
     public function query($sql)
     {
-        for ($i = 0; $i < \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+        for ($i = 0; $i < \Octris\Core\Db\Mysql::DEADLOCK_ATTEMPTS; ++$i) {
             $res = $this->real_query($sql);
 
             if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
@@ -97,7 +97,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
      */
     public function multiQuery($sql)
     {
-        for ($i = 0; $i < \Octris\Core\Db\Mysql::T_DEADLOCK_ATTEMPTS; ++$i) {
+        for ($i = 0; $i < \Octris\Core\Db\Mysql::DEADLOCK_ATTEMPTS; ++$i) {
             $res = $this->multi_query($sql);
 
             if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
