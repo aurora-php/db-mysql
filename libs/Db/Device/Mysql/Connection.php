@@ -114,7 +114,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
             throw new \Exception($this->error, $this->errno);
         }
 
-        return new \Octris\Core\Db\Device\Mysql\Result($this);
+        return new \Octris\Core\Db\Device\Mysql\Result(new \mysqli_result($this, MYSQLI_STORE_RESULT));
     }
 
     /**
@@ -152,7 +152,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
             throw new \Exception($this->error, $this->errno);
         }
 
-        return new \Octris\Core\Db\Device\Mysql\Result($this);
+        return new \Octris\Core\Db\Device\Mysql\Result(new \mysqli_result($this, MYSQLI_STORE_RESULT));
     }
 
     /**

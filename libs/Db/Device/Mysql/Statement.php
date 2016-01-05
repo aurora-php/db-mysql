@@ -110,14 +110,17 @@ class Statement
     /**
      * Execute the statement.
      *
-     * @return  \Octris\Core\Db\Device\Mysql                Instance of mysql result set.
+     * @return  \Octris\Core\Db\Device\Mysql\Result|null|false              Instance of mysql result set or null if statement has no result or false in case of an error.
      */
     public function execute()
     {
         $this->instance->execute();
-        $this->instance->store_result();
 
-        $result = new \Octris\Core\Db\Device\Mysql\Result($this);
+        if (!is_null($result = $this->instance->result_metadata())) {
+            if (($result = $this->instance->get_result())) {
+                $result = new \Octris\Core\Db\Device\Mysql\Result($result, $this);
+            }
+        }
 
         return $result;
     }
