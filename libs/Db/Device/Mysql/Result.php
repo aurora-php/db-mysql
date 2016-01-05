@@ -20,11 +20,11 @@ namespace Octris\Core\Db\Device\Mysql;
 class Result implements \Iterator, \Countable
 {
     /**
-     * Database object that instantiated this class.
+     * Instance of statement class.
      *
-     * @type    \Octris\Core\Db\Device\Mysql\Connection|\Octris\Core\Db\Device\Mysql\Statement
+     * @type    \Octris\Core\Db\Device\Mysql\Statement
      */
-    protected $link;
+    protected $stmt;
 
     /**
      * Instance of database result class.
@@ -41,13 +41,6 @@ class Result implements \Iterator, \Countable
     protected $position = -1;
 
     /**
-     * Cache for rewinding cursor.
-     *
-     * @type    array
-     */
-    protected $cache = array();
-
-    /**
      * Valid result row.
      *
      * @type    bool
@@ -57,29 +50,13 @@ class Result implements \Iterator, \Countable
     /**
      * Constructor.
      *
-     * @param   \Octris\Core\Db\Device\Mysql\Connection|\Octris\Core\Db\Device\Mysql\Statement     $link       Database link.
+     * @param   \mysqli_result                              $result         Result instance.
+     * @param   \Octris\Core\Db\Device\Mysql\Statement      $stmt           Optional instance of prepared statement.
      */
-    public function __construct($link)
+    public function __construct(\mysqli_result $result, \Octris\Core\Db\Device\Mysql\Statement $stmt = null)
     {
-        $this->link = $link;
-
-        if ($link instanceof \Octris\Core\Db\Device\Mysql\Statement) {
-            // was constructed from a prepared statement - collect result set fields
-            if (!($metadata = $link->getResultMetadata())) {
-                return;
-            }
-
-            $this->result = $metadata;
-
-            #$metadata->fetch_fields();
-
-            #var_dump($metadata);
-        } elseif ($link instanceof \Octris\Core\Db\Device\Mysql\Connection) {
-            // was constructed from a query
-            $this->result = new \mysqli_result($link, MYSQLI_STORE_RESULT);
-        } else {
-            throw new \InvalidArgumentException('Invalid object type');
-        }
+        $this->stmt = $stmt;
+        $this->result = $result;
 
         $this->next();
     }
