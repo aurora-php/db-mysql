@@ -81,19 +81,12 @@ class Mysql extends \Octris\Core\Db\Device
     /**
      * Create database connection.
      *
+     * @param   array                       $options                Host configuration options.
      * @return  \Octris\Core\Db\Device\Mysql\Connection             Connection to a mysql database.
      */
-    public function getConnection()
+    public function createConnection(array $options)
     {
-        $cn = new \Octris\Core\Db\Device\Mysql\Connection(
-            array(
-                'host'     => $this->host,
-                'port'     => $this->port,
-                'database' => $this->database,
-                'username' => $this->username,
-                'password' => $this->password
-            )
-        );
+        $cn = new \Octris\Core\Db\Device\Mysql\Connection($this, $options);
 
         return $cn;
     }
