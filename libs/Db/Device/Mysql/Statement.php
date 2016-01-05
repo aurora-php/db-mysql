@@ -116,7 +116,7 @@ class Statement
         $this->instance->execute();
         $this->instance->store_result();
 
-        $result = new \Octris\Core\Db\Device\Mysql\Result($this->instance);
+        $result = new \Octris\Core\Db\Device\Mysql\Result($this);
 
         return $result;
     }
