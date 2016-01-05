@@ -45,24 +45,25 @@ class Statement
      */
     public function __get($name)
     {
+        $return = null;
+
         switch ($name) {
+            case 'affected_rows':
             case 'errno':
+            case 'error_list':
             case 'error':
+            case 'field_count':
+            case 'insert_id':
+            case 'num_rows':
+            case 'param_count':
+            case 'sqlstate':
                 $return = $this->instance->{$name};
                 break;
             default:
                 throw new \InvalidArgumentException('Undefined property: ' . __CLASS__ . '::$' . $name);
         }
-    }
 
-    /**
-     * Returns number of parameters in statement.
-     *
-     * @return  int                                 Number of parameters.
-     */
-    public function paramCount()
-    {
-        return $this->instance->param_count;
+        return $return;
     }
 
     /**
@@ -81,7 +82,7 @@ class Statement
                 $cnt2,
                 $cnt1
             );
-        } elseif ($cnt1 != ($cnt2 = $this->paramCount())) {
+        } elseif ($cnt1 != ($cnt2 = $this->instance->param_count)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'Number of specified parameters (%d) does not match required parameters (%d)',
