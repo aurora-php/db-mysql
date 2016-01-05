@@ -97,6 +97,16 @@ class Statement
     }
 
     /**
+     * Return metadata of result.
+     *
+     * @return  \mysqli_result|null
+     */
+    public function getResultMetadata()
+    {
+        return $this->instance->result_metadata();
+    }
+
+    /**
      * Execute the statement.
      *
      * @return  \Octris\Core\Db\Device\Mysql                Instance of mysql result set.
