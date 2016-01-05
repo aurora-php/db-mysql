@@ -65,13 +65,15 @@ class Result implements \Iterator, \Countable
 
         if ($link instanceof \Octris\Core\Db\Device\Mysql\Statement) {
             // was constructed from a prepared statement - collect result set fields
-            if (!($metadata = $link->result_metadata())) {
+            if (!($metadata = $link->getResultMetadata())) {
                 return;
             }
 
-            $metadata->fetch_fields();
+            $this->result = $metadata;
 
-            var_dump($metadata);
+            #$metadata->fetch_fields();
+
+            #var_dump($metadata);
         } elseif ($link instanceof \Octris\Core\Db\Device\Mysql\Connection) {
             // was constructed from a query
             $this->result = new \mysqli_result($link, MYSQLI_STORE_RESULT);
