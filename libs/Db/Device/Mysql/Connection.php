@@ -14,18 +14,28 @@ namespace Octris\Core\Db\Device\Mysql;
 /**
  * MySQL connection handler.
  *
- * @copyright   copyright (c) 2012-2014 by Harald Lapp
+ * @copyright   copyright (c) 2012-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
 {
     /**
+     * Device the connection belongs to.
+     *
+     * @type    \Octris\Core\Db\Device\Mysql
+     */
+    protected $device;
+
+    /**
      * Constructor.
      *
-     * @param   array                       $options            Connection options.
+     * @param   \Octris\Core\Db\Device\Mysql    $device             Device the connection belongs to.
+     * @param   array                           $options            Connection options.
      */
-    public function __construct(array $options)
+    public function __construct(\Octris\Core\Db\Device\Mysql $device, array $options)
     {
+        $this->device = $device;
+
         parent::__construct($options['host'], $options['username'], $options['password'], $options['database'], $options['port']);
 
         if ($this->errno != 0) {
