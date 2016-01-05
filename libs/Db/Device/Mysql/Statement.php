@@ -92,7 +92,7 @@ class Statement
         } else {
             array_unshift($values, $types);
 
-            call_user_func_array(array($this->instance, 'bind_param'), $values);
+            $this->instance->bind_param(...$values);
         }
     }
 
