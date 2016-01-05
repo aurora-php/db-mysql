@@ -38,6 +38,24 @@ class Statement
     }
 
     /**
+     * Magic getter.
+     *
+     * @param   string          $name               Name of property to return.
+     * @return  mixed                               Value of property.
+     */
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'errno':
+            case 'error':
+                $return = $this->instance->{$name};
+                break;
+            default:
+                throw new \InvalidArgumentException('Undefined property: ' . __CLASS__ . '::$' . $name);
+        }
+    }
+
+    /**
      * Returns number of parameters in statement.
      *
      * @return  int                                 Number of parameters.
