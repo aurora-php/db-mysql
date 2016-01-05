@@ -56,7 +56,40 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
 
         $this->autocommit(true);
 
-        parent::release();
+        $this->device->release($this);
+    }
+
+    /**
+     * Check availability of a connection.
+     *
+     * @return  bool                                        Returns true if connection is alive.
+     */
+    public function isAlive()
+    {
+        return $this->ping();
+    }
+
+    /**
+     * Resolve a database reference.
+     *
+     * @param   \Octris\Core\Db\Type\DbRef                          $dbref      Database reference to resolve.
+     * @return  bool                                                            Returns false always due to missing implementagtion.
+     * @todo    Add implementation.
+     */
+    public function resolve(\Octris\Core\Db\Type\DbRef $dbref)
+    {
+        return false;
+    }
+
+    /**
+     * Return instance of collection object.
+     *
+     * @param   string          $name                               Name of collection to return instance of.
+     * @return  \Octris\Core\Db\Device\Mysql\Collection             Instance of a MySQL collection.
+     * @todo    Add implementation.
+     */
+    public function getCollection($name)
+    {
     }
 
     /**
@@ -107,7 +140,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
      */
     public function multiQuery($sql)
     {
-        for ($i = 0; $i < \Octris\Core\Db\Mysql::DEADLOCK_ATTEMPTS; ++$i) {
+        for ($i = 0; $i < \Octris\Core\Db\Device\Mysql::DEADLOCK_ATTEMPTS; ++$i) {
             $res = $this->multi_query($sql);
 
             if ($res !== false || ($this->errno != 1205 && $this->errno != 1213)) {
