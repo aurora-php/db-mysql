@@ -38,13 +38,32 @@ class Statement
     }
 
     /**
-     * Returns number of parameters in statement.
+     * Magic getter.
      *
-     * @return  int                                 Number of parameters.
+     * @param   string          $name               Name of property to return.
+     * @return  mixed                               Value of property.
      */
-    public function paramCount()
+    public function __get($name)
     {
-        return $this->instance->param_count;
+        $return = null;
+
+        switch ($name) {
+            case 'affected_rows':
+            case 'errno':
+            case 'error_list':
+            case 'error':
+            case 'field_count':
+            case 'insert_id':
+            case 'num_rows':
+            case 'param_count':
+            case 'sqlstate':
+                $return = $this->instance->{$name};
+                break;
+            default:
+                throw new \InvalidArgumentException('Undefined property: ' . __CLASS__ . '::$' . $name);
+        }
+
+        return $return;
     }
 
     /**
@@ -56,15 +75,15 @@ class Statement
     public function bindParam($types, array $values)
     {
         if (preg_match('/[^idsb]/', $types)) {
-            throw new \Exception('Unknown data type in "' . $types . '"');
+            throw new \InvalidArgumentException('Unknown data type in "' . $types . '"');
         } elseif (($cnt2 = strlen($types)) != ($cnt1 = count($values))) {
-            throw new \Exception(
+            throw new \InvalidArgumentException(
                 'Number of specified types (%d) and number of specified values (%d) does not match',
                 $cnt2,
                 $cnt1
             );
-        } elseif ($cnt1 != ($cnt2 = $this->paramCount())) {
-            throw new \Exception(
+        } elseif ($cnt1 != ($cnt2 = $this->instance->param_count)) {
+            throw new \InvalidArgumentException(
                 sprintf(
                     'Number of specified parameters (%d) does not match required parameters (%d)',
                     $cnt1,
@@ -74,21 +93,34 @@ class Statement
         } else {
             array_unshift($values, $types);
 
-            call_user_func_array(array($this->instance, 'bind_param'), $values);
+            $this->instance->bind_param(...$values);
         }
+    }
+
+    /**
+     * Return metadata of result.
+     *
+     * @return  \mysqli_result|null
+     */
+    public function getResultMetadata()
+    {
+        return $this->instance->result_metadata();
     }
 
     /**
      * Execute the statement.
      *
-     * @return  \Octris\Core\Db\Device\Mysql                Instance of mysql result set.
+     * @return  \Octris\Core\Db\Device\Mysql\Result|null|false              Instance of mysql result set or null if statement has no result or false in case of an error.
      */
     public function execute()
     {
         $this->instance->execute();
-        $this->instance->store_result();
 
-        $result = new \Octris\Core\Db\Device\Mysql\Result($this->instance);
+        if (!is_null($result = $this->instance->result_metadata())) {
+            if (($result = $this->instance->get_result())) {
+                $result = new \Octris\Core\Db\Device\Mysql\Result($result, $this);
+            }
+        }
 
         return $result;
     }

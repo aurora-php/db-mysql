@@ -14,7 +14,7 @@ namespace Octris\Core\Db\Device;
 /**
  * MySQL database device.
  *
- * @copyright   copyright (c) 2012-2014 by Harald Lapp
+ * @copyright   copyright (c) 2012-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Mysql extends \Octris\Core\Db\Device
@@ -24,41 +24,6 @@ class Mysql extends \Octris\Core\Db\Device
      * recognized and query is failing.
      */
     const DEADLOCK_ATTEMPTS = 5;
-
-    /**
-     * Host of database server.
-     *
-     * @type    string
-     */
-    protected $host;
-
-    /**
-     * Port of database server.
-     *
-     * @type    int
-     */
-    protected $port;
-
-    /**
-     * Name of database to connect to.
-     *
-     * @type    string
-     */
-    protected $database;
-
-    /**
-     * Username to use for connection.
-     *
-     * @type    string
-     */
-    protected $username;
-
-    /**
-     * Password to use for connection.
-     *
-     * @type    string
-     */
-    protected $password;
 
     /**
      * Constructor.
@@ -71,29 +36,26 @@ class Mysql extends \Octris\Core\Db\Device
      */
     public function __construct($host, $port, $database, $username, $password = '')
     {
-        $this->host     = $host;
-        $this->port     = $port;
-        $this->database = $database;
-        $this->username = $username;
-        $this->password = $password;
+        parent::__construct();
+
+        $this->addHost(\Octris\Core\Db::DB_MASTER, array(
+            'host'     => $host,
+            'port'     => $port,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password
+        ));
     }
 
     /**
      * Create database connection.
      *
+     * @param   array                       $options                Host configuration options.
      * @return  \Octris\Core\Db\Device\Mysql\Connection             Connection to a mysql database.
      */
-    public function getConnection()
+    public function createConnection(array $options)
     {
-        $cn = new \Octris\Core\Db\Device\Mysql\Connection(
-            array(
-                'host'     => $this->host,
-                'port'     => $this->port,
-                'database' => $this->database,
-                'username' => $this->username,
-                'password' => $this->password
-            )
-        );
+        $cn = new \Octris\Core\Db\Device\Mysql\Connection($this, $options);
 
         return $cn;
     }
