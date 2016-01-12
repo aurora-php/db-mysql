@@ -17,7 +17,7 @@ namespace Octris\Core\Db\Device\Mysql;
  * @copyright   copyright (c) 2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Result implements \Iterator, \Countable
+class Result implements \Octris\Core\Db\Device\IResult
 {
     /**
      * Instance of statement class.
