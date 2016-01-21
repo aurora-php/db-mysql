@@ -17,7 +17,7 @@ namespace Octris\Core\Db\Device\Mysql;
  * @copyright   copyright (c) 2012-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, \Octris\Core\Db\Device\IDialect
+class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
 {
     /**
      * Device the connection belongs to.
@@ -170,24 +170,5 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection, 
         }
 
         return $stmt;
-    }
-
-    /** Interface: IDialect **/
-
-    /**
-     * Return LIMIT string.
-     *
-     * @param   int             $limit                          Limit rows.
-     * @param   int             $offset                         Optional offset.
-     */
-    public function getLimitString($limit, $offset = null)
-    {
-        $return = sprintf('LIMIT %d', $limit);
-
-        if (!is_null($offset)) {
-            $return .= sprintf(' OFFSET %d', $offset);
-        }
-
-        return $return;
     }
 }
