@@ -116,6 +116,10 @@ class Statement
     {
         $this->instance->execute();
 
+        if ($this->instance->errno > 0) {
+            throw new \Exception($this->instance->error, $this->instance->errno);
+        }
+
         if (!is_null($result = $this->instance->result_metadata())) {
             if (($result = $this->instance->get_result())) {
                 $result = new \Octris\Core\Db\Device\Mysql\Result($result, $this);
