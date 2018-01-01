@@ -100,7 +100,7 @@ class Connection extends \mysqli implements \Octris\Core\Db\Device\IConnection
      * @param   string              $sql                    SQL query to perform.
      * @return  \Octris\Core\Db\Device\Mysql\Result         Query result.
      */
-    public function query($sql)
+    public function query($sql, $resultmode = NULL)
     {
         for ($i = 0; $i < \Octris\Core\Db\Device\Mysql::DEADLOCK_ATTEMPTS; ++$i) {
             $res = $this->real_query($sql);
