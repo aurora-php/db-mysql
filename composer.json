@@ -1,0 +1,24 @@
+{
+    "name": "octris/db-mysql",
+    "description": "Database layer Mysql device.",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "homepage": "https://github.com/octris/dbmysql",
+    "authors": [
+        {
+            "name": "Harald Lapp",
+            "email": "harald@octctris.org"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.6.0",
+        "octris/db": "^0.1.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Octris\\Db\\": "libs/Db/"
+        }
+    }
+}
