@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris/core' package.
+ * This file is part of the 'octris/db-mysql' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Octris\Core\Db\Device\Mysql;
+namespace Octris\Db\Device\Mysql;
 
 /**
  * Query result object.
  *
- * @copyright   copyright (c) 2016 by Harald Lapp
+ * @copyright   copyright (c) 2016-2018 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Result implements \Octris\Core\Db\Device\IResult
+class Result implements \Octris\Db\Device\IResult
 {
     /**
      * Instance of statement class.
      *
-     * @type    \Octris\Core\Db\Device\Mysql\Statement
+     * @type    \Octris\Db\Device\Mysql\Statement
      */
     protected $stmt;
 
@@ -51,9 +51,9 @@ class Result implements \Octris\Core\Db\Device\IResult
      * Constructor.
      *
      * @param   \mysqli_result                              $result         Result instance.
-     * @param   \Octris\Core\Db\Device\Mysql\Statement      $stmt           Optional instance of prepared statement.
+     * @param   \Octris\Db\Device\Mysql\Statement      $stmt           Optional instance of prepared statement.
      */
-    public function __construct(\mysqli_result $result, \Octris\Core\Db\Device\Mysql\Statement $stmt = null)
+    public function __construct(\mysqli_result $result, \Octris\Db\Device\Mysql\Statement $stmt = null)
     {
         $this->stmt = $stmt;
         $this->result = $result;

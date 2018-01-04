@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris/core' package.
+ * This file is part of the 'octris/db-mysql' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Octris\Core\Db\Device\Mysql;
+namespace Octris\Db\Device\Mysql;
 
 /**
  * MySQL prepared statement.
  *
- * @copyright   copyright (c) 2012-2014 by Harald Lapp
+ * @copyright   copyright (c) 2012-2018 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Statement
@@ -110,7 +110,7 @@ class Statement
     /**
      * Execute the statement.
      *
-     * @return  \Octris\Core\Db\Device\Mysql\Result|null|false              Instance of mysql result set or null if statement has no result or false in case of an error.
+     * @return  \Octris\Db\Device\Mysql\Result|null|false              Instance of mysql result set or null if statement has no result or false in case of an error.
      */
     public function execute()
     {
@@ -122,7 +122,7 @@ class Statement
 
         if (!is_null($result = $this->instance->result_metadata())) {
             if (($result = $this->instance->get_result())) {
-                $result = new \Octris\Core\Db\Device\Mysql\Result($result, $this);
+                $result = new \Octris\Db\Device\Mysql\Result($result, $this);
             }
         }
 

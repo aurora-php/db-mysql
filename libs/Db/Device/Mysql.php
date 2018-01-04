@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris/core' package.
+ * This file is part of the 'octris/db-mysql' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Octris\Core\Db\Device;
+namespace Octris\Db\Device;
 
 /**
  * MySQL database device.
  *
- * @copyright   copyright (c) 2012-2016 by Harald Lapp
+ * @copyright   copyright (c) 2012-2018 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Mysql extends \Octris\Core\Db\Device
+class Mysql extends \Octris\Db\Device
 {
     /**
      * Configuration of attempts a query should be executed, till a deadlock is actually
@@ -38,7 +38,7 @@ class Mysql extends \Octris\Core\Db\Device
     {
         parent::__construct();
 
-        $this->addHost(\Octris\Core\Db::DB_MASTER, array(
+        $this->addHost(\Octris\Db::DB_MASTER, array(
             'host'     => $host,
             'port'     => $port,
             'database' => $database,
@@ -51,11 +51,11 @@ class Mysql extends \Octris\Core\Db\Device
      * Create database connection.
      *
      * @param   array                       $options                Host configuration options.
-     * @return  \Octris\Core\Db\Device\Mysql\Connection             Connection to a mysql database.
+     * @return  \Octris\Db\Device\Mysql\Connection                  Connection to a mysql database.
      */
     public function createConnection(array $options)
     {
-        $cn = new \Octris\Core\Db\Device\Mysql\Connection($this, $options);
+        $cn = new \Octris\Db\Device\Mysql\Connection($this, $options);
 
         return $cn;
     }
