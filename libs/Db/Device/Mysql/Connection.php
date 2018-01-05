@@ -17,7 +17,7 @@ namespace Octris\Db\Device\Mysql;
  * @copyright   copyright (c) 2012-2018 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Connection extends \mysqli implements \Octris\Db\Device\IConnection
+class Connection extends \mysqli implements \Octris\Db\Device\ConnectionInterface
 {
     /**
      * Device the connection belongs to.
