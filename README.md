@@ -1,3 +1,3 @@
-# Mysql device for database layer
+# Mysql device for octris database component
 
 ...
