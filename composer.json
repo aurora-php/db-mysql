@@ -3,7 +3,7 @@
     "description": "Mysql device for octris database component.",
     "type": "library",
     "license": "BSD-3-Clause",
-    "homepage": "https://github.com/octris/dbmysql",
+    "homepage": "https://github.com/octris/db-mysql",
     "authors": [
         {
             "name": "Harald Lapp",
