@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Octris\Db\Device\Mysql;
 
 /**
  * MySQL prepared statement.
  *
- * @copyright   copyright (c) 2012-2018 by Harald Lapp
+ * @copyright   copyright (c) 2012-present by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Statement
@@ -43,7 +45,7 @@ class Statement
      * @param   string          $name               Name of property to return.
      * @return  mixed                               Value of property.
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         $return = null;
 
@@ -70,9 +72,10 @@ class Statement
      * Bind parameters to statement.
      *
      * @param   string          $types              String of type identifiers.
-     * @param   array           $values             Array of values to bind.
+     * @param   mixed           $value              Values to bind.
+     * @param   mixed           ...
      */
-    public function bindParam($types, array $values)
+    public function bindParam(string $types, mixed ...$values)
     {
         if (preg_match('/[^idsb]/', $types)) {
             throw new \InvalidArgumentException('Unknown data type in "' . $types . '"');
@@ -91,18 +94,16 @@ class Statement
                 )
             );
         } else {
-            array_unshift($values, $types);
-
-            $this->instance->bind_param(...$values);
+            $this->instance->bind_param($types, ...$values);
         }
     }
 
     /**
      * Return metadata of result.
      *
-     * @return  \mysqli_result|null
+     * @return  \mysqli_result|false
      */
-    public function getResultMetadata()
+    public function getResultMetadata(): \mysqli_result|false
     {
         return $this->instance->result_metadata();
     }
@@ -112,7 +113,7 @@ class Statement
      *
      * @return  \Octris\Db\Device\Mysql\Result|null|false              Instance of mysql result set or null if statement has no result or false in case of an error.
      */
-    public function execute()
+    public function execute(): Result|null|false
     {
         $this->instance->execute();
 

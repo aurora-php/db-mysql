@@ -14,7 +14,7 @@ namespace Octris\Db\Device\Mysql;
 /**
  * Query result object.
  *
- * @copyright   copyright (c) 2016-2018 by Harald Lapp
+ * @copyright   copyright (c) 2016-present by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Result implements \Octris\Db\Device\ResultInterface
@@ -50,10 +50,10 @@ class Result implements \Octris\Db\Device\ResultInterface
     /**
      * Constructor.
      *
-     * @param   \mysqli_result                              $result         Result instance.
+     * @param   \mysqli_result                         $result         Result instance.
      * @param   \Octris\Db\Device\Mysql\Statement      $stmt           Optional instance of prepared statement.
      */
-    public function __construct(\mysqli_result $result, \Octris\Db\Device\Mysql\Statement $stmt = null)
+    public function __construct(\mysqli_result $result, Statement $stmt = null)
     {
         $this->stmt = $stmt;
         $this->result = $result;
@@ -66,7 +66,7 @@ class Result implements \Octris\Db\Device\ResultInterface
      *
      * @return  int                                         Number of items in the result-set.
      */
-    public function count()
+    public function count(): int
     {
         return $this->result->num_rows;
     }
@@ -76,7 +76,7 @@ class Result implements \Octris\Db\Device\ResultInterface
      *
      * @return  array                                       Row data.
      */
-    public function current()
+    public function current(): array
     {
         if ($this->valid) {
             $this->result->data_seek($this->position);
@@ -92,7 +92,7 @@ class Result implements \Octris\Db\Device\ResultInterface
     /**
      * Advance cursor to the next item.
      */
-    public function next()
+    public function next(): void
     {
         $this->valid = (++$this->position < $this->result->num_rows);
     }
@@ -102,7 +102,7 @@ class Result implements \Octris\Db\Device\ResultInterface
      *
      * @return  int                                      Cursor position.
      */
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
@@ -110,7 +110,7 @@ class Result implements \Octris\Db\Device\ResultInterface
     /**
      * Rewind cursor.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -120,7 +120,7 @@ class Result implements \Octris\Db\Device\ResultInterface
      *
      * @return  bool                                        Returns true, if cursor position is valid.
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->valid;
     }

@@ -9,12 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Octris\Db\Device;
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 /**
  * MySQL database device.
  *
- * @copyright   copyright (c) 2012-2018 by Harald Lapp
+ * @copyright   copyright (c) 2012-present by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Mysql extends \Octris\Db\Device
@@ -34,28 +38,31 @@ class Mysql extends \Octris\Db\Device
      * @param   string          $username           Username to use for connection.
      * @param   string          $password           Optional password to use for connection.
      */
-    public function __construct($host, $port, $database, $username, $password = '')
+    public function __construct(array|\Octris\PropertyCollection $options)
     {
         parent::__construct();
 
-        $this->addHost(\Octris\Db::DB_MASTER, array(
-            'host'     => $host,
-            'port'     => $port,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password
-        ));
+        $this->addHost(Type::MASTER, $options);
     }
 
     /**
-     * Create database connection.
-     *
-     * @param   array                       $options                Host configuration options.
-     * @return  \Octris\Db\Device\Mysql\Connection                  Connection to a mysql database.
+     * {@inheritDoc}
      */
-    public function createConnection(array $options)
+    protected function validateOptions(\Octris\PropertyCollection $options): bool
     {
-        $cn = new \Octris\Db\Device\Mysql\Connection($this, $options);
+        if ($options->has('host')) {
+            // todo
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function createConnection(\Octris\PropertyCollection $options): Mysql\Connection
+    {
+        $cn = new Mysql\Connection($this, $options);
 
         return $cn;
     }
