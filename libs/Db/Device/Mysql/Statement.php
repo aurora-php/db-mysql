@@ -40,15 +40,15 @@ class Statement
     }
 
     /**
-     * Magic getter.
+     * Access mysqli properties:
+     * affected_rows, errno, error_list, error, field_count,
+     * insert_id, num_rows, param_count, sqlstate
      *
      * @param   string          $name               Name of property to return.
      * @return  mixed                               Value of property.
      */
     public function __get(string $name): mixed
     {
-        $return = null;
-
         switch ($name) {
             case 'affected_rows':
             case 'errno':

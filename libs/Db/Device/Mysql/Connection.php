@@ -57,6 +57,40 @@ class Connection implements \Octris\Db\Device\ConnectionInterface
         }
     }
 
+    /**
+     * Access mysqli properties:
+     * affected_rows, errno, error_list, error, field_count,
+     * insert_id, num_rows, param_count, sqlstate
+     *
+     * @param   string          $name               Name of property to return.
+     * @return  mixed                               Value of property.
+     */
+    public function __get(string $name): mixed
+    {
+        switch ($name) {
+            case 'affected_rows':
+            case 'errno':
+            case 'error_list':
+            case 'error':
+            case 'field_count':
+            case 'insert_id':
+            case 'num_rows':
+            case 'param_count':
+            case 'sqlstate':
+                $return = $this->mysqli->{$name};
+                break;
+            default:
+                throw new \InvalidArgumentException('Undefined property: ' . __CLASS__ . '::$' . $name);
+        }
+
+        return $return;
+    }
+
+    /**
+     * Whether pooling is enabled.
+     *
+     * @return bool
+     */
     public function doPooling(): bool
     {
         return !!($this->options->get('pooling', 0));
