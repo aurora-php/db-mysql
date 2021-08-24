@@ -81,9 +81,11 @@ class Statement
             throw new \InvalidArgumentException('Unknown data type in "' . $types . '"');
         } elseif (($cnt2 = strlen($types)) != ($cnt1 = count($values))) {
             throw new \InvalidArgumentException(
-                'Number of specified types (%d) and number of specified values (%d) does not match',
-                $cnt2,
-                $cnt1
+                sprintf(
+                    'Number of specified types (%d) and number of specified values (%d) does not match',
+                    $cnt2,
+                    $cnt1
+                )
             );
         } elseif ($cnt1 != ($cnt2 = $this->instance->param_count)) {
             throw new \InvalidArgumentException(
