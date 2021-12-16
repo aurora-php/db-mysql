@@ -13,7 +13,7 @@
 
     "require": {
         "php": ">=8.1",
-        "octris/db": "^0.2.0"
+        "octris/db": "^0.3.0"
     },
 
     "autoload": {
