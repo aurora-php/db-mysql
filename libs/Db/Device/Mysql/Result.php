@@ -76,7 +76,7 @@ class Result implements \Octris\Db\Device\ResultInterface
      *
      * @return  array                                       Row data.
      */
-    public function current(): array
+    public function current(): array|bool
     {
         if ($this->valid) {
             $this->result->data_seek($this->position);
